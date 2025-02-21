@@ -3,6 +3,7 @@ import type { APIRoute } from 'astro';
 import { createHash } from 'crypto';
 import pkg from 'pg';
 const {Pool} = pkg;
+export const prerender = false;
 
 // Configura las conexiones a tus bases de datos usando variables de entorno
 const poolLS = new Pool({
@@ -92,7 +93,10 @@ export const post: APIRoute = async ({ request }) => {
       );
 
       // Registro exitoso: redirigir a /login
-      return Response.redirect('/login', 303);
+      return new Response(
+        JSON.stringify({ success: true, message: "Usuario registrado con éxito" }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
     } finally {
       // Liberar las conexiones
       clientLS.release();

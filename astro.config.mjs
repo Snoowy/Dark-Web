@@ -16,9 +16,14 @@ import YukinaConfig from "./yukina.config";
 
 import pagefind from "astro-pagefind";
 
+// Importa el adaptador para Node
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
   site: YukinaConfig.site,
+  output: "server",  // Habilita el SSR para páginas dinámicas
+  adapter: node({ mode: "standalone" }),
   integrations: [
     tailwind(),
     svelte(),
@@ -35,7 +40,7 @@ export default defineConfig({
       globalInstance: true,
     }),
     sitemap(),
-    pagefind(),
+    pagefind(),  // Se usa correctamente la integración ahora
   ],
   markdown: {
     shikiConfig: {

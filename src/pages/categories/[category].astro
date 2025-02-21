@@ -3,6 +3,7 @@ import PostArchiveLayout from "../../layouts/PostArchiveLayout.astro";
 import I18nKeys from "../../locales/keys";
 import { i18n } from "../../locales/translation";
 import { GetCategories, type Archive } from "../../utils/content";
+export const prerender = true;
 
 export async function getStaticPaths() {
   const categories = await GetCategories();

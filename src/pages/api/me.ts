@@ -1,6 +1,7 @@
   // src/pages/api/me.ts
 import type { APIRoute } from "astro";
 import jwt from "jsonwebtoken";
+export const prerender = false;
 
 export const get: APIRoute = async ({ cookies }) => {
   try {
