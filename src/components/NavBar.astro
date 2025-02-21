@@ -52,42 +52,12 @@ const navCount = YukinaConfig.navigators.length;
     </div>
     <div class="toolbar">
       <div class="theme">
-        <button type="button" id="theme-switcher">
-          <Icon
-            id="theme-icon-light"
-            name="line-md:moon-alt-to-sunny-outline-loop-transition"
-            size={24}
-            class="hidden"
-          />
-          <Icon
-            id="theme-icon-dark"
-            name="line-md:sunny-outline-to-moon-alt-loop-transition"
-            size={24}
-            class="hidden"
-          />
-        </button>
       </div>
-      <div id="auth-section" class="ml-auto">
-        <a class="login-btn" href="/login">Login</a>
-        <a class="register-btn" href="/register">Register</a>
+      <div id="auth-section" class="flex items-center space-x-2">
+        <a class="nav-btn" href="/login">Login</a>
+        <a class="nav-btn" href="/register">Register</a>
       </div>
     </div>
-    
-    <!-- (Código adicional, por ejemplo, un duplicado del theme-switcher si es requerido) -->
-    <button type="button" id="theme-switcher">
-      <Icon
-        id="theme-icon-light"
-        name="line-md:moon-alt-to-sunny-outline-loop-transition"
-        size={24}
-        class="hidden"
-      />
-      <Icon
-        id="theme-icon-dark"
-        name="line-md:sunny-outline-to-moon-alt-loop-transition"
-        size={24}
-        class="hidden"
-      />
-    </button>
   </div>
   <div id="mobile-menu" class="px-3 transition-all">
     <ul
@@ -201,6 +171,16 @@ const navCount = YukinaConfig.navigators.length;
   .mobile-menu-nav li a {
     @apply flex flex-row items-center justify-between;
     font-family: var(--primary-font);
+  }
+  #auth-section {
+  @apply ml-2; /* Espaciado del theme switcher */
+  }
+
+  .nav-btn {
+    @apply flex h-[3.25rem] items-center rounded-lg px-6 py-2 font-medium text-[var(--text-color)] transition-all;
+    @apply hover:bg-[var(--primary-color-hover)] hover:text-[var(--primary-color)];
+    @apply active:scale-95;
+      font-family: var(--primary-font);
   }
 
   @keyframes nav-onload-animation {

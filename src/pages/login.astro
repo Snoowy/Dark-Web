@@ -1,0 +1,14 @@
+---
+import Main from "../layouts/MainLayout.astro";
+
+interface Props {
+  title?: string;
+  subTitle?: string;
+  bannerImage?: string;
+  published?: Date;
+}
+const { title, subTitle, bannerImage, } = Astro.props;
+---
+
+<Main title={title} subTitle={subTitle} bannerImage={bannerImage}>
+  <!-- <Fragment set:html={tocHTMLString} /> -->
