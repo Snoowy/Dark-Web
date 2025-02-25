@@ -1,0 +1,113 @@
+---
+import Main from "../layouts/MainLayout.astro";
+
+interface Props {
+  title?: string;
+  subTitle?: string;
+  bannerImage?: string;
+  published?: Date;
+}
+const { title, subTitle, bannerImage } = Astro.props;
+---
+
+<Main title={title} subTitle={subTitle} bannerImage={bannerImage}>
+  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <!-- El formulario ya apunta al endpoint /register -->
+    <form id="registerForm" action="/register" method="POST" class="bg-white p-8 rounded-lg shadow-lg animate-fadeIn">
+      <h2 class="text-2xl font-bold mb-6 text-center">Registro</h2>
+      
+      <div class="mb-4">
+        <label for="user" class="block text-gray-700 font-bold mb-2">Usuario</label>
+        <input 
+          type="text" 
+          id="user" 
+          name="user" 
+          required 
+          placeholder="Ingresa tu usuario"
+          class="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500 transition duration-300" 
+        />
+      </div>
+      
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-bold mb-2">Correo</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          placeholder="tu@correo.com"
+          class="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500 transition duration-300" 
+        />
+      </div>
+      
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 font-bold mb-2">Contraseña</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          required 
+          placeholder="Ingresa tu contraseña"
+          class="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500 transition duration-300" 
+        />
+      </div>
+      
+      <div class="mb-4">
+        <label for="confirmPassword" class="block text-gray-700 font-bold mb-2">Confirmar Contraseña</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          name="confirmPassword" 
+          required 
+          placeholder="Confirma tu contraseña"
+          class="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500 transition duration-300" 
+        />
+      </div>
+      
+      <!-- Se ha removido el input y scripts de captcha temporalmente -->
+      
+      <div class="flex items-center justify-center">
+        <button 
+          type="submit"
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
+        >
+          Registrarse
+        </button>
+      </div>
+    </form>
+  </div>
+</Main>
+
+<!-- Script para manejar la respuesta sin recargar la página -->
+<script>
+  const registerForm = document.getElementById('registerForm') as HTMLFormElement | null;
+
+if (registerForm) {
+  registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evita la recarga de la página
+    const formData = new FormData(registerForm);
+    
+    try {
+      const response = await fetch('/register', {
+        method: 'POST',
+        body: formData
+      });
+      
+      const result = await response.json();
+      
+      if (result.error) {
+        alert(`Error: ${result.error_msg}`);
+      } else {
+        alert(`Éxito: ${result.message}`);
+        // Opcionalmente redirige a otra página, por ejemplo:
+        // window.location.href = '/login';
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+      alert('Hubo un error en la solicitud.');
+    }
+  });
+} else {
+  console.error("No se encontró el formulario de registro.");
+}
+</script>

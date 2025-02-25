@@ -1,55 +1,74 @@
 ---
-// Component imports
+export const prerender = false; // Deshabilita la generación estática para SSR
+
 import Main from "../layouts/MainLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import Pagination from "../components/controllers/Pagination.astro";
-// Utils
-import type { PaginateFunction } from "astro";
 import { GetSortedPosts } from "../utils/content";
 
-export async function getStaticPaths({
-  paginate,
-}: {
-  paginate: PaginateFunction;
-}) {
-  const postCollections = await GetSortedPosts();
-  return paginate(postCollections, { pageSize: 6 });
-}
-const { page } = Astro.props;
+// Número de posts por página
+const pageSize = 6;
+
+// Obtén todos los posts de forma dinámica en cada solicitud
+const posts = await GetSortedPosts();
+
+// Determina la página actual a partir de los parámetros de la URL
+const currentPage = Astro.params.page ? Number(Astro.params.page) : 1;
+
+// Calcula la cantidad total de páginas
+const totalPosts = posts.length;
+const lastPage = Math.ceil(totalPosts / pageSize);
+
+// Extrae los posts correspondientes a la página actual
+const startIndex = (currentPage - 1) * pageSize;
+const pageData = posts.slice(startIndex, startIndex + pageSize);
+
+// Define las URLs para la paginación usando undefined en lugar de null
+const pagination = {
+  data: pageData,
+  currentPage,
+  lastPage,
+  url: {
+    prev: currentPage > 1 ? `/page/${currentPage - 1}` : undefined,
+    next: currentPage < lastPage ? `/page/${currentPage + 1}` : undefined,
+  },
+};
 ---
 
 <Main>
   <div class="space-y-8">
     <div class="w-full space-y-4">
-      {
-        page.data.map((entry, index) => (
-          <div
-            class="onload-animation"
-            style={`animation-delay: calc(var(--onload-animation-delay) + ${index + 1} * var(--onload-animation-interval));`}
-          >
-            <PostCard
-              id={entry.id}
-              title={entry.data.title}
-              published={entry.data.published}
-              category={entry.data.category}
-              tags={entry.data.tags}
-              description={entry.data.description}
-              image={entry.data.cover}
-              readingMetadata={
-                (entry.rendered!.metadata as any).frontmatter.readingMetadata
-              }
-            />
-          </div>
-        ))
-      }
+      {pagination.data.map((entry, index) => (
+        <div
+          class="onload-animation"
+          style={`animation-delay: calc(var(--onload-animation-delay) + ${
+            index + 1
+          } * var(--onload-animation-interval));`}
+        >
+          <PostCard
+            id={entry.id}
+            title={entry.data.title}
+            published={entry.data.published}
+            category={entry.data.category}
+            tags={entry.data.tags}
+            description={entry.data.description}
+            image={entry.data.cover}
+            readingMetadata={
+              (entry.rendered!.metadata as any).frontmatter.readingMetadata
+            }
+          />
+        </div>
+      ))}
     </div>
     <Pagination
       class="onload-animation"
-      lastPage={page.lastPage}
-      current={page.currentPage}
-      prevURL={page.url.prev}
-      nextURL={page.url.next}
-      style={`animation-delay: calc(var(--onload-animation-delay) + ${page.data.length + 1} * var(--onload-animation-interval));`}
+      lastPage={pagination.lastPage}
+      current={pagination.currentPage}
+      prevURL={pagination.url.prev}
+      nextURL={pagination.url.next}
+      style={`animation-delay: calc(var(--onload-animation-delay) + ${
+        pagination.data.length + 1
+      } * var(--onload-animation-interval));`}
     />
   </div>
 </Main>
