@@ -18,6 +18,19 @@ enum I18nKeys {
   archive_year_title_count = "archive_year_title_count",
   archive_year_title_count_single = "archive_year_title_count_single",
 
+  register_reg = "register_reg",
+  register_account = "register_account",
+  register_email = "register_email",
+  register_user = "register_user",
+  register_pass = "register_pass",
+  register_rpass = "register_rpass",
+  register_acepterms = "register_acepterms",
+  register_terms = "register_terms",
+  register_iuser = "register_iuser",
+  register_ipw = "register_ipw",
+  register_iprw = "register_iprw",
+  
+
   pages_categories_archive = "pages_categories_archive",
   pages_archive_archive = "pages_archive_archive",
   pages_tags_archive = "pages_tags_archive"

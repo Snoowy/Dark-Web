@@ -24,4 +24,17 @@ export const en: Translation = {
   [key.pages_categories_archive]: "Article Archive",
   [key.pages_tags_archive]: "Tag Archive",
   [key.pages_archive_archive]: "Archive",
+
+
+  [key.register_account]: "Account",
+  [key.register_email]: "Email",
+  [key.register_user]: "User",
+  [key.register_pass]: "Password",
+  [key.register_rpass]: "Confirm Password",
+  [key.register_acepterms]: "I accept the",
+  [key.register_terms]: "Terms and Conditions",
+  [key.register_reg]: "Register",
+  [key.register_iuser]: "Enter your username",
+  [key.register_ipw]: "Enter your password",
+  [key.register_iprw]: "Confirm your password",
 };
