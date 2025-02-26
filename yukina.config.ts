@@ -2,13 +2,13 @@ import I18nKeys from "./src/locales/keys";
 import type { Configuration } from "./src/types/config";
 
 const YukinaConfig: Configuration = {
-  title: "Yukina",
-  subTitle: "Yukina Template Demo Site",
-  brandTitle: "Yukina",
+  title: "GFDark:",
+  subTitle: "Cataclysm",
+  brandTitle: "GFDark",
 
   description: "Demo Site",
 
-  site: "https://yukina-blog.vercel.app",
+  site: "https://gfdark.com",
 
   locale: "en", // set for website language and date format
 
@@ -18,16 +18,20 @@ const YukinaConfig: Configuration = {
       href: "/",
     },
     {
-      nameKey: I18nKeys.nav_bar_archive,
-      href: "/archive",
+      nameKey: I18nKeys.nav_bar_rew,
+      href: "/rewards",
     },
     {
-      nameKey: I18nKeys.nav_bar_about,
-      href: "/about",
+      nameKey: I18nKeys.nav_bar_wiki,
+      href: "/wiki",
     },
     {
-      nameKey: I18nKeys.nav_bar_github,
-      href: "https://github.com/WhitePaper233/yukina",
+      nameKey: I18nKeys.nav_bar_shop,
+      href: "/shop",
+    },
+    {
+      nameKey: I18nKeys.nav_bar_rank,
+      href: "/shop",
     },
   ],
 

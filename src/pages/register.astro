@@ -8,10 +8,10 @@ interface Props {
   bannerImage?: string;
   published?: Date;
 }
-const { title, subTitle, bannerImage } = Astro.props;
+const { bannerImage } = Astro.props;
 ---
 
-<Main title={title} subTitle={subTitle} bannerImage={bannerImage}>
+<Main title={i18n(I18nKeys.double_register)} subTitle="" bannerImage={bannerImage}>
   <div class="min-h-screen flex items-center justify-center bg-black-100">
     <!-- Actualiza el endpoint a /api/register -->
     <form 
@@ -70,7 +70,6 @@ const { title, subTitle, bannerImage } = Astro.props;
         />
       </div>
 
-  <!-- Botón de aceptar términos y condiciones -->
   <!-- Botón de aceptar términos y condiciones -->
       <div class="mb-4">
        <label class="flex items-center">

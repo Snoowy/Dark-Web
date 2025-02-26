@@ -10,8 +10,16 @@ export const en: Translation = {
   [key.nav_bar_archive]: "Archive",
   [key.nav_bar_about]: "About",
   [key.nav_bar_github]: "GitHub",
+  [key.nav_bar_wiki]: "Wiki",
+  [key.nav_bar_shop]: "Shop",
+  [key.nav_bar_rew]: "Rewards",
+  [key.nav_bar_rank]: "Ranking",
   [key.nav_bar_search_placeholder]: "Search",
 
+  [key.server_status]: "Status",
+
+  [key.double_register]: "Register:",
+  
   [key.post_card_words]: "Words",
   [key.post_card_minutes]: "Minutes",
 

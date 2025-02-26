@@ -7,6 +7,10 @@ enum I18nKeys {
   nav_bar_archive = "nav_bar_archive",
   nav_bar_about = "nav_bar_about",
   nav_bar_github = "nav_bar_github",
+  nav_bar_rew = "nav_bar_rew",
+  nav_bar_wiki = "nav_bar_wiki",
+  nav_bar_shop = "nav_bar_shop",
+  nav_bar_rank = "nav_bar_rank",
   nav_bar_search_placeholder = "nav_bar_search_placeholder",
 
   post_card_words = "post_card_words",
@@ -29,8 +33,11 @@ enum I18nKeys {
   register_iuser = "register_iuser",
   register_ipw = "register_ipw",
   register_iprw = "register_iprw",
-  
 
+  server_status = "server_status",
+
+  double_register = "double_register",
+  
   pages_categories_archive = "pages_categories_archive",
   pages_archive_archive = "pages_archive_archive",
   pages_tags_archive = "pages_tags_archive"

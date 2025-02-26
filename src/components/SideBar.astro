@@ -50,23 +50,8 @@ const categories = await GetCategories();
         >
           <div class="title m-[0.375rem]">
             <p class="pl-4 text-xl font-bold text-[var(--text-color)]">
-              {i18n(I18nKeys.side_bar_categories)}
+              {i18n(I18nKeys.server_status)}
             </p>
-          </div>
-          <div class="flex flex-col">
-            {[...categories.keys()].map((category) => (
-              <a
-                href={`/categories/${category}`}
-                class="category flex flex-row items-center justify-between rounded-lg px-3 py-2 transition-all hover:bg-[var(--primary-color-lighten)]"
-              >
-                <p class="text-[var(--text-color)] transition-all">
-                  {categories.get(category)!.name}
-                </p>
-                <span class="rounded-md bg-[var(--primary-color-lighten)] px-2.5 py-0.5 text-[var(--primary-color)]">
-                  {categories.get(category)!.posts.length}
-                </span>
-              </a>
-            ))}
           </div>
         </div>
       )

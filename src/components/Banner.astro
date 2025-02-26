@@ -15,6 +15,10 @@ const hasHeaderImg = bannerImage !== undefined || slug !== undefined;
 
 let carouselImgsList = YukinaConfig.banners;
 const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
+
+// Procesamos el título para separar el ":" y aplicar la animación
+const processedTitle = title ?? YukinaConfig.title;
+const titleParts = processedTitle.split(":");
 ---
 
 <div id="banner" class="banner onload-animation-fade-in">
@@ -50,12 +54,23 @@ const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
         class="absolute left-1/2 top-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2 lg:w-3/4"
       >
         <div class="flex flex-col">
-          <h1
-            class:list={[hasTitle ? "title-normal" : "title-index"]}
-            class="title"
-          >
-            {title ?? YukinaConfig.title}
-          </h1>
+          {titleParts.length > 1 ? (
+            <h1
+              class:list={[hasTitle ? "title-normal" : "title-index"]}
+              class="title"
+            >
+              {titleParts[0]}
+              <span class="blinking-colon">:</span>
+              {titleParts.slice(1).join(":")}
+            </h1>
+          ) : (
+            <h1
+              class:list={[hasTitle ? "title-normal" : "title-index"]}
+              class="title"
+            >
+              {processedTitle}
+            </h1>
+          )}
           <h2 class="subtitle">{subTitle ?? YukinaConfig.subTitle}</h2>
         </div>
       </div>
@@ -83,24 +98,28 @@ const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
           x="48"
           y="0"
           class="opacity-25"
-          style={{ animationDelay: "-2s", animationDuration: "7s" }}></use>
+          style={{ animationDelay: "-2s", animationDuration: "7s" }}
+        ></use>
         <use
           xlink:href="#gentle-wave"
           x="48"
           y="3"
           class="opacity-50"
-          style={{ animationDelay: "-3s", animationDuration: "10s" }}></use>
+          style={{ animationDelay: "-3s", animationDuration: "10s" }}
+        ></use>
         <use
           xlink:href="#gentle-wave"
           x="48"
           y="5"
           class="opacity-75"
-          style={{ animationDelay: "-4s", animationDuration: "13s" }}></use>
+          style={{ animationDelay: "-4s", animationDuration: "13s" }}
+        ></use>
         <use
           xlink:href="#gentle-wave"
           x="48"
           y="7"
-          style={{ animationDelay: "-5s", animationDuration: "20s" }}></use>
+          style={{ animationDelay: "-5s", animationDuration: "20s" }}
+        ></use>
       </g>
     </svg>
   </div>
@@ -160,8 +179,7 @@ const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
 
   .carousel .item {
     @apply absolute left-0 top-0 z-0 h-full w-full origin-center bg-cover bg-center bg-no-repeat opacity-0;
-    animation: carousel-animation var(--carouselAnimationTime) linear infinite
-      0s;
+    animation: carousel-animation var(--carouselAnimationTime) linear infinite 0s;
     backface-visibility: hidden;
     transform-style: preserve-3d;
   }
@@ -225,5 +243,16 @@ const carouselAnimationTime = `${carouselImgsList.length * 6}s`;
       opacity: 1;
       height: var(--banner-height);
     }
+  }
+
+  /* Estilos para la animación del ":" */
+  .blinking-colon {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
   }
 </style>
