@@ -80,34 +80,44 @@ const { title, subTitle, bannerImage } = Astro.props;
 
 <!-- Script para manejar la respuesta sin recargar la página -->
 <script>
-  const registerForm = document.getElementById('registerForm') as HTMLFormElement | null;
+  const registerForm = document.getElementById('registerForm') as HTMLFormElement;
 
-if (registerForm) {
-  registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Evita la recarga de la página
-    const formData = new FormData(registerForm);
-    
-    try {
-      const response = await fetch('/register', {
-        method: 'POST',
-        body: formData
-      });
+  if (registerForm) {
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Evita la recarga de la página
+      const formData = new FormData(registerForm);
       
-      const result = await response.json();
-      
-      if (result.error) {
-        alert(`Error: ${result.error_msg}`);
-      } else {
-        alert(`Éxito: ${result.message}`);
-        // Opcionalmente redirige a otra página, por ejemplo:
-        // window.location.href = '/login';
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          body: formData
+        });
+
+        // Verifica el header de contenido
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.indexOf('application/json') !== -1) {
+          const result = await response.json();
+          console.log(result);
+          
+          if(result.error) {
+            alert(`Error: ${result.error_msg}`);
+          } else {
+            alert(`Éxito: ${result.message}`);
+            // Opcional: redirige a otra página, por ejemplo:
+            // window.location.href = '/login';
+          }
+        } else {
+          const text = await response.text();
+          console.error('El endpoint no retornó JSON:', text);
+          alert('El servidor no retornó un JSON válido.');
+        }
+      } catch (error) {
+        console.error('Error en la petición:', error);
+        alert('Hubo un error en la solicitud.');
       }
-    } catch (error) {
-      console.error('Error en la petición:', error);
-      alert('Hubo un error en la solicitud.');
-    }
-  });
-} else {
-  console.error("No se encontró el formulario de registro.");
-}
+    });
+  } else {
+    console.error("No se encontró el formulario de registro.");
+  }
 </script>
+
