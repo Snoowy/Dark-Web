@@ -32,7 +32,9 @@ export const en: Translation = {
   [key.pages_categories_archive]: "Article Archive",
   [key.pages_tags_archive]: "Tag Archive",
   [key.pages_archive_archive]: "Archive",
-
+  
+  [key.nav_bar_login]: "Login",
+  [key.nav_bar_register]: "Register",
 
   [key.register_account]: "Account",
   [key.register_email]: "Email",

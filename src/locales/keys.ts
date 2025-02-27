@@ -34,6 +34,9 @@ enum I18nKeys {
   register_ipw = "register_ipw",
   register_iprw = "register_iprw",
 
+  nav_bar_login = "nav_bar_login",
+  nav_bar_register = "nav_bar_register",
+
   server_status = "server_status",
 
   double_register = "double_register",
